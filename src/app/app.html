@@ -1,6 +1,16 @@
 <div class = "main">
   <h1>{{title}}</h1>
-  <h2>What would you like to do today</h2>
+  
+  <label for="addItemInput">What would you like to do today?</label>
+
+  <input
+    #newItem
+    placeholder="Add an item"
+    (keyup.enter)="addItem(newItem.value); newItem.value=''"
+    class="lg-text-input"
+    id = "addItemInput" />
+
+    <button class="btn-primary" (click) = "addItem(newItem.value)">Add</button>
 
   <ul>
     @for(item of items; track item.description){
