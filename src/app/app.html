@@ -10,7 +10,7 @@
     class="lg-text-input"
     id = "addItemInput" />
 
-    <button class="btn-primary" (click) = "addItem(newItem.value)">Add</button>
+    <button class="btn-primary" (click) = "addItem(newItem.value); newItem.value = ''">Add</button>
 
   <h2>
     {{items.length}}
