@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Item } from './item/item_interface';
+import { ItemComponent } from './item/item';
 
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [CommonModule, ItemComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true,
   
 })
-export class App {
+export class AppComponent {
   title = "My Todo App";
   filter : "all" | "active" | "done" = "all";
 
@@ -33,6 +35,9 @@ export class App {
       return this.allItems;
     }
     return this.allItems.filter((item) => this.filter === "done" ? item.done : !item.done);
+  }
+  remove(item: Item) {
+    this.allItems.splice(this.allItems.indexOf(item), 1);
   }
 
 }

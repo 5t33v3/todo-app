@@ -12,9 +12,16 @@
 
     <button class="btn-primary" (click) = "addItem(newItem.value)">Add</button>
 
+  <h2>
+    {{items.length}}
+    <span> @if (items.length === 1) { item } @else { items }</span>
+  </h2>
+
   <ul>
-    @for(item of items; track item.description){
-      <li>{{item.description}}</li>
+    @for (item of items; track item.description){
+      <li>
+        <app-item (remove) = "remove(item)" [item] = "item"></app-item>
+      </li>
     }
   </ul>
 </div>
