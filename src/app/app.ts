@@ -17,9 +17,29 @@ import { TodoService } from './item/todo.service';
 
 export class AppComponent {
   title = "My Todo App";
+  isDarkMode = false;
   filter: "all" | "active" | "done" = "all";
 
-  constructor(public todoService: TodoService) {}
+  constructor(public todoService: TodoService) {
+
+    const savedMode = localStorage.getItem('darkMode');
+    this.isDarkMode = savedMode === 'true';
+    this.applyTheme();
+  }
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    localStorage.setItem('darkMode', this.isDarkMode.toString());
+    this.applyTheme();
+  }
+
+  private applyTheme() {
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');  
+    }
+  }
 
   addItem(description: string) {
     this.todoService.addItem(description);
