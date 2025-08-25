@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Item } from './item/item_interface';
 import { ItemComponent } from './item/item';
+import { TodoService } from './item/todo.service';
 
 
 @Component({
@@ -12,32 +13,30 @@ import { ItemComponent } from './item/item';
   standalone: true,
   
 })
+
+
 export class AppComponent {
   title = "My Todo App";
-  filter : "all" | "active" | "done" = "all";
+  filter: "all" | "active" | "done" = "all";
 
-  allItems = [
-    { description: "eat", done: true },
-    { description: "sleep", done: false },
-    { description: "play", done: false },
-    { description: "laugh", done: false }
-  ];
+  constructor(public todoService: TodoService) {}
 
-  addItem(description: string){
-    if (!description) return;
+  addItem(description: string) {
+    this.todoService.addItem(description);
+  }
 
-    this.allItems.unshift(
-      {description, done: false}
+  get items() {
+    if (this.filter === "all") {
+      return this.todoService.items;
+    }
+    return this.todoService.items.filter(item =>
+      this.filter === "done" ? item.done : !item.done
     );
   }
-  get items(){
-    if (this.filter === "all"){
-      return this.allItems;
-    }
-    return this.allItems.filter((item) => this.filter === "done" ? item.done : !item.done);
-  }
-  remove(item: Item) {
-    this.allItems.splice(this.allItems.indexOf(item), 1);
-  }
 
+  remove(item: Item) {
+    this.todoService.removeItem(item);
+  }
 }
+  
+
