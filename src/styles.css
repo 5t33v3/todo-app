@@ -52,3 +52,50 @@ body {
 .btn-primary:active {
   background-color: #212020;
 }
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode button {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+body {
+  background-color: #ffffff;
+  color: #323232;
+  transition: background-color 0.3s, color 0.3s;
+}
+.toggle-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+/* Light Mode */
+.toggle-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.toggle-btn:hover {
+  background-color: #ddd;
+}
+
+/* Dark Mode */
+body.dark-mode .toggle-btn {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+body.dark-mode .toggle-btn:hover {
+  background-color: #444;
+}
