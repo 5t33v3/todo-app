@@ -1,15 +1,15 @@
 <div class="item">
   <input
-    [id]="item.description"
-    type="checkbox"
-    (change)="item.done = !item.done"
-    [checked]="item.done" />
+  [id]="item.description"
+  type="checkbox"
+  (change)="toggleDone()"
+  [checked]="item.done" />
   <label [for]="item.description">{{item.description}}</label>
 
   @if (!editable) {
   <div class="btn-wrapper">
     <button class="btn" (click)="editable = !editable">Edit</button>
-    <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+    <button class="btn btn-warn" (click)="remove.emit(item)">Delete</button>
   </div>
   }
 

@@ -1,11 +1,10 @@
 import { Component, Input,Output, EventEmitter } from '@angular/core';
 import { Item } from './item_interface';
-import { CommonModule } from '@angular/common';
-
+import { TodoService } from './todo.service';
 
 @Component({
   selector: 'app-item',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './item.html',
   styleUrl: './item.css'
 })
@@ -14,10 +13,15 @@ export class ItemComponent {
   @Input() item!: Item;
   @Output() remove = new EventEmitter<Item>();
 
-  saveItem(description: string){
+  constructor(private todoService: TodoService) {}
+
+  toggleDone() {
+    this.todoService.toggleDone(this.item);
+  }
+  saveItem(description: string) {
     if (!description) return;
     this.editable = false;
     this.item.description = description;
+    this.todoService.save(); // Persist changes
   }
-
 }
